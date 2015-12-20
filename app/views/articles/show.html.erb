@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @article.path %>
+</p>
+
+<p>
+  <strong>Keyword:</strong>
+  <%= @article.keyword %>
+</p>
+
+<p>
+  <strong>Publication:</strong>
+  <%= @article.publication %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @article.field %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @article.author %>
+</p>
+
+<p>
+  <strong>Obligate1:</strong>
+  <%= @article.obligate1 %>
+</p>
+
+<p>
+  <strong>Obligate2:</strong>
+  <%= @article.obligate2 %>
+</p>
+
+<p>
+  <strong>Obligate3:</strong>
+  <%= @article.obligate3 %>
+</p>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyString
+  questionuser: MyString
+  articleid: 1
+  field: MyString
+  filepath: MyString
+  liker: MyString
+  obligate1: MyString
+  obligate2: MyString
+  obligate3: MyString
+
+two:
+  title: MyString
+  content: MyString
+  questionuser: MyString
+  articleid: 1
+  field: MyString
+  filepath: MyString
+  liker: MyString
+  obligate1: MyString
+  obligate2: MyString
+  obligate3: MyString

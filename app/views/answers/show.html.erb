@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Questionid:</strong>
+  <%= @answer.questionid %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @answer.level %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @answer.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @answer.content %>
+</p>
+
+<p>
+  <strong>Answeruser:</strong>
+  <%= @answer.answeruser %>
+</p>
+
+<p>
+  <strong>Filepath:</strong>
+  <%= @answer.filepath %>
+</p>
+
+<p>
+  <strong>Liker:</strong>
+  <%= @answer.liker %>
+</p>
+
+<p>
+  <strong>Obligate1:</strong>
+  <%= @answer.obligate1 %>
+</p>
+
+<p>
+  <strong>Obligate2:</strong>
+  <%= @answer.obligate2 %>
+</p>
+
+<p>
+  <strong>Obligate3:</strong>
+  <%= @answer.obligate3 %>
+</p>
+
+<%= link_to 'Edit', edit_answer_path(@answer) %> |
+<%= link_to 'Back', answers_path %>

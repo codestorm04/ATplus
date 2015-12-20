@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @question.content %>
+</p>
+
+<p>
+  <strong>Questionuser:</strong>
+  <%= @question.questionuser %>
+</p>
+
+<p>
+  <strong>Articleid:</strong>
+  <%= @question.articleid %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @question.field %>
+</p>
+
+<p>
+  <strong>Filepath:</strong>
+  <%= @question.filepath %>
+</p>
+
+<p>
+  <strong>Liker:</strong>
+  <%= @question.liker %>
+</p>
+
+<p>
+  <strong>Obligate1:</strong>
+  <%= @question.obligate1 %>
+</p>
+
+<p>
+  <strong>Obligate2:</strong>
+  <%= @question.obligate2 %>
+</p>
+
+<p>
+  <strong>Obligate3:</strong>
+  <%= @question.obligate3 %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

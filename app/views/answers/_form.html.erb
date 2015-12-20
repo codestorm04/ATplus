@@ -1,0 +1,57 @@
+<%= form_for(@answer) do |f| %>
+  <% if @answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+      <ul>
+      <% @answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :questionid %><br>
+    <%= f.number_field :questionid %>
+  </div>
+  <div class="field">
+    <%= f.label :level %><br>
+    <%= f.number_field :level %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %>
+  </div>
+  <div class="field">
+    <%= f.label :answeruser %><br>
+    <%= f.text_field :answeruser %>
+  </div>
+  <div class="field">
+    <%= f.label :filepath %><br>
+    <%= f.text_field :filepath %>
+  </div>
+  <div class="field">
+    <%= f.label :liker %><br>
+    <%= f.text_field :liker %>
+  </div>
+  <div class="field">
+    <%= f.label :obligate1 %><br>
+    <%= f.text_field :obligate1 %>
+  </div>
+  <div class="field">
+    <%= f.label :obligate2 %><br>
+    <%= f.text_field :obligate2 %>
+  </div>
+  <div class="field">
+    <%= f.label :obligate3 %><br>
+    <%= f.text_field :obligate3 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

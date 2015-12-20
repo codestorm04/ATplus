@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  path: MyString
+  keyword: MyString
+  publication: MyString
+  field: MyString
+  author: MyString
+  obligate1: MyString
+  obligate2: MyString
+  obligate3: MyString
+
+two:
+  title: MyString
+  path: MyString
+  keyword: MyString
+  publication: MyString
+  field: MyString
+  author: MyString
+  obligate1: MyString
+  obligate2: MyString
+  obligate3: MyString

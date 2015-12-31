@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218090627) do
+ActiveRecord::Schema.define(version: 20151228143419) do
 
   create_table "answers", force: :cascade do |t|
-    t.integer  "questionid"
+    t.integer  "question_id"
     t.integer  "level"
     t.string   "title"
     t.string   "content"
@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 20151218090627) do
     t.string   "obligate1"
     t.string   "obligate2"
     t.string   "obligate3"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "articles", force: :cascade do |t|
@@ -52,17 +52,18 @@ ActiveRecord::Schema.define(version: 20151218090627) do
 
   create_table "likes", force: :cascade do |t|
     t.string   "liketype"
-    t.integer  "likeid"
-    t.string   "useremail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "question_id"
+    t.integer  "answer_id"
   end
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.string   "questionuser"
-    t.integer  "articleid"
+    t.integer  "article_id"
     t.string   "field"
     t.string   "filepath"
     t.string   "liker"

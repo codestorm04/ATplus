@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<p><%=@id%></p>
+<%=@num%>
 <p>
   <strong>Title:</strong>
   <%= @question.title %>
@@ -27,17 +27,17 @@
 
 <p>
   <strong>Liker:</strong>
-  <%= @question.likes.count %>
+  <%= @question.liker %>
 </p>
-<h2><p>Answers</p></h2>
+
 <table align="center" width=1000px >
   <% @answers.each do |answer| %>
   <thead>
     <tr>
       <th align="left">level:<%=answer.level %><br>Time<%= answer.created_at %></th>
       <th align="left">Answeruser</th>
-      <th align="right">like:<%=answer.likes.count%></th>
-      <th align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></th>
+      <th align="right">like:</th>
+      <th align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></input></th>
     </tr>
   </thead>
   
@@ -46,7 +46,11 @@
          <td></td>
          <td><%= answer.answeruser %></td>
          <td><%= answer.content %></td>
+         <%if(Like.where(:user_id=>session[:user_id]).where(:answer_id => answer.id).count==0)%>
          <td align="right"><%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
+         <%else%>
+         <td align="right"><%=button_to "cancel like!!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
+         <%end%>
        </tr>
   </tbody>
   <% end %>
@@ -56,7 +60,7 @@
 <h1><label>您有什么看法？</label><h1>
 <%=form_tag  :action => "addanswer",:method => :post do%>
 <p>
-<%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %>
+<%=text_area_tag :content,params[:content],:style=>"width:400px;height:200px" %>
 </p>
 <%=submit_tag "submit" %>
 <% end %>

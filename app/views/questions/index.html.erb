@@ -1,14 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Questions</h1>
-
+<div align="center">
+  <p>
+  <%=form_tag :controller => "questions",:action => "search",:method => :post do%>
+  <%=text_field_tag :text,:z,:placeholder => "Please input what you need here",:autofocus=>"true",:value =>"",:style =>"width:800px;height:30px"%>
+  <p>
+  author<%=radio_button_tag "type","author",:checked%>
+  field<%=radio_button_tag "type","field"%>
+  keyword<%=radio_button_tag "type","keyword"%>
+  <%=submit_tag "search"%>
+  </p>
+  
+  <%end%>
+  </p>
+</div>
 <table>
   <thead>
     <tr>
       <th>Title</th>
       <th>Content</th>
       <th>Questionuser</th>
-      <th>Articleid</th>
+      <th>Article</th>
       <th>Field</th>
       <th>Filepath</th>
       <th>Liker</th>
@@ -25,14 +38,14 @@
         <td><%= question.title %></td>
         <td><%= question.content %></td>
         <td><%= question.questionuser %></td>
-        <td><%= question.articleid %></td>
+        <td><%= question.article.title %></td>
         <td><%= question.field %></td>
         <td><%= question.filepath %></td>
         <td><%= question.liker %></td>
         <td><%= question.obligate1 %></td>
         <td><%= question.obligate2 %></td>
         <td><%= question.obligate3 %></td>
-        <td><%= link_to 'Show', question %></td>
+        <td><%= link_to 'Show',{:action => "show",:qid => question.id} %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -42,4 +55,4 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to 'Click here to ask a new question!!', {:controller => "questions",:action => "new" }%>

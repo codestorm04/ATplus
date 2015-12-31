@@ -1,13 +1,19 @@
 Rails.application.routes.draw do
+  root 'sessions#new'
   get 'sessions/new'
-
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-	
+	get 'questions/show'
+	post'questions/search'
+	post'questions/addquestion'
+	get 'answers/reply'
+	post 'answers/like'
+	post'answers/reply'
+	post 'questions/addanswer'
   get  'signup' => 'users#new'
 
-
+  
   resources :articles
   resources :likes
   resources :fields

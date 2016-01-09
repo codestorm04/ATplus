@@ -6,15 +6,49 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :content, :questionuser, :articleid, :field, :filepath, :liker, :obligate1, :obligate2, :obligate3)
   end
-  
   def index
     @questions = Question.all
   end
+  def manage
+      @uid=session[:user_id]
+      @username=User.where(:id => @uid).first.name
+      @questions=Question.where(:questionuser => 'yuan')
+  end
+  def ban
+      @qid = params[:qid]
+      @state =Question.where(:id=>@qid).first.state
+      if(@state == nil ||@state==0) then
+         Question.update(@qid,:state => '1')
+      else
+         Question.update(@qid,:state => '0')
+      end
+      @uid=session[:user_id]
+      @username=User.where(:id => @uid).first.name
+      @questions=Question.where(:questionuser => 'yuan')
+  end
   def addquestion
+    @flag=0
+    @uid=session[:user_id]
+    @uname=User.where(:id => @uid).first.name
     @id=params[:sid]
-    @text1=params[:text]
-    @text2=params[:atext]
+    if(@id==1)
+      @field="computer"
+    elsif (@id==2)
+      @field="software"
+    elsif (@id==3)
+      @field="internet"
+    end
+    @title=params[:text]
+    @article=params[:atext]
     @content=params[:content]
+    @flag=Article.where(:title => @article).count
+    if(@flag==0)
+      redirect_to :action =>"index"
+    else
+    @aid=Article.where(:title => @article).first.id
+    @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
+    @questions=Question.all
+    end
   end      
   def search
     @flag=0
@@ -81,7 +115,19 @@ class QuestionsController < ApplicationController
    session[:qid]=@id
    @answers=Answer.where(:question_id => @id)
   end
-
+  def like
+    @qid = session[:qid]
+    @uid = session[:user_id]
+    @question=Question.find(@qid)
+    @exist=Like.where(:user_id => @uid).where(:question_id=>@qid).count
+    if(@exist==0) then
+    @new_like=Like.create(:question_id =>@qid,:user_id =>@uid)
+    else
+    @lid=Like.where(:user_id => @uid).where(:question_id => @qid).first.id
+    Like.delete(@lid)
+    end  
+    @answers=Answer.where(:question_id => @qid).order("level")
+  end
   # GET /questions/new
   def new
     @question = Question.new

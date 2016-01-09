@@ -56,7 +56,15 @@
 </table>
 <br>
 <hr>
+<%if(@question.state==1)%>
+<h1>The Question is banned by the owner!<h1>
+<%else%>  
 <h1><label>您有什么看法？</label><h1>
+<%if(Like.where(:user_id=>session[:user_id]).where(:question_id => session[:qid]).count==0)%>
+      <p align="right"><%=button_to "like this question!",{:controller =>"questions",:action => "like"}%></p>
+<%else%>
+      <p align="right"><%=button_to "cancel like this question!!",{:controller =>"questions",:action => "like"}%></p>
+<%end%>
 reply to level <%=@alevel%>:
 <%=form_tag  :controller =>"questions",:action => "addanswer",:method => :post do%>
 <p>
@@ -64,6 +72,7 @@ reply to level <%=@alevel%>:
 </p>
 <%=submit_tag "submit" %>
 <% end %>
+<% end %>
 <p>
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Back to the main page', questions_path %>
 </p>

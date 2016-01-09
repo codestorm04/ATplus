@@ -12,8 +12,8 @@ articles.each do |article|
   Article.create!(article)
 end
 
-questions = [{:title => 'When will I finish my project?', :content => 'asdfljaskdlfjklasjfjaslfdl', :questionuser =>'yuan',:article_id => '2',:field => 'software',:filepath=>'www.baidu.com',:liker =>'liu'},
-  	         {:title => 'When will I finish my final?', :content => 'asdfljaasjfjaslfdl123133', :questionuser =>'gap',:article_id => '3',:field => 'hardware',:filepath=>'www.google.com',:liker =>'zhang'}   
+questions = [{:title => 'When will I finish my project?', :content => 'asdfljaskdlfjklasjfjaslfdl', :questionuser =>'yuan',:article_id => '2',:field => 'software',:filepath=>'www.baidu.com',:liker =>'liu',:state=>'0'},
+  	         {:title => 'When will I finish my final?', :content => 'asdfljaasjfjaslfdl123133', :questionuser =>'gap',:article_id => '3',:field => 'hardware',:filepath=>'www.google.com',:liker =>'zhang',:state=>'0'}   
   	 ]
   	 
 questions.each do |question|

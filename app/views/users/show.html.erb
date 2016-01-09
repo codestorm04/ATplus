@@ -1,43 +1,5 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Admin:</strong>
-  <%= @user.admin %>
-</p>
-
-<p>
-  <strong>Sex:</strong>
-  <%= @user.sex %>
-</p>
-
-<p>
-  <strong>Institute:</strong>
-  <%= @user.institute %>
-</p>
-
-<p>
-  <strong>Phonenumber:</strong>
-  <%= @user.phonenumber %>
-</p>
-
-<p>
-  <strong>Field:</strong>
-  <%= @user.field %>
-</p>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %>|
-<%= link_to 'Back', users_path %>
+<p><%=link_to 'personal information',:controller => :users,:action => :information%></p>
 <h1>Listing Questions</h1>
 <div align="center">
   <p>

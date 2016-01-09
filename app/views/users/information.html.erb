@@ -1,0 +1,34 @@
+<h1>Personal Information</h1>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @user.admin %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @user.sex %>
+</p>
+
+<p>
+  <strong>Institute:</strong>
+  <%= @user.institute %>
+</p>
+
+<p>
+  <strong>Phonenumber:</strong>
+  <%= @user.phonenumber %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %>|
+<%= link_to 'Your questions',:controller =>:questions,:action=>:manage%>
+<%= link_to 'Back to the main page',:controller =>:questions,:action =>:index%>

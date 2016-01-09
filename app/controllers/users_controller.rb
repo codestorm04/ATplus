@@ -6,7 +6,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
-
+  def information
+    @uid=session[:user_id]
+    @user= User.find(@uid)
+  end
   # GET /users/1
   # GET /users/1.json
   def show

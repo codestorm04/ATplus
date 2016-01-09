@@ -29,13 +29,14 @@
 </p>
 
 <p>
-  <strong>Liker:</strong>
+  <strong>Likes:</strong>
   <%= @question.likes.count %>
 </p>
 
 <h4><p style="text-align:left;">Answers</p></h4>
 <div class="list-group">
   <% @answers.each do |answer| %>
+<<<<<<< HEAD
   <div class="list-group-item">
     <h4 class="list-group-item-heading answeruser"><%= answer.answeruser %></h4>
     <div class="answer_content">
@@ -60,10 +61,34 @@
       </div>
     </div>
   </div>
+=======
+  <thead>
+    <tr>
+      <th align="left">level:<%=answer.level %><br>Time<%= answer.created_at %></th>
+      <th align="left">Answeruser</th>
+      <th align="right">like:<%=answer.likes.count%></th>
+      <th align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+       <tr>
+         <td></td>
+         <td><%= answer.answeruser %></td>
+         <td><%= answer.content %></td>
+         <%if(Like.where(:user_id=>session[:user_id]).where(:answer_id => answer.id).count==0)%>
+         <td align="right"><%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
+         <%else%>
+         <td align="right"><%=button_to "cancel like!!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
+         <%end%>
+       </tr>
+  </tbody>
+>>>>>>> yyt
   <% end %>
 </div>
 
 <br>
+<<<<<<< HEAD
     <hr>
     <h1><label>您有什么看法？</label><h1>
     <%=form_tag  :action => "addanswer",:method => :post do%>
@@ -79,3 +104,25 @@
   related questions
 </div>
 </div>
+=======
+<hr>
+<%if(@question.state==1)%>
+<h1>The Question is banned by the owner!<h1>
+<%else%>  
+<h1><label>您有什么看法？</label><h1>
+    <%if(Like.where(:user_id=>session[:user_id]).where(:question_id => session[:qid]).count==0)%>
+      <p align="right"><%=button_to "like this question!",{:controller =>"questions",:action => "like"}%></p>
+    <%else%>
+      <p align="right"><%=button_to "cancel like this question!!",{:controller =>"questions",:action => "like"}%></p>
+    <%end%>
+<%=form_tag  :action => "addanswer",:method => :post do%>
+<p>
+<%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %>
+</p>
+<%=submit_tag "submit" %>
+<% end %>
+<% end %>
+<p>
+<%= link_to 'Back', questions_path %>
+</p>
+>>>>>>> yyt

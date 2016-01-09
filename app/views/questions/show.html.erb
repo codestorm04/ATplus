@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-8">
 <p><%=@id%></p>
 <p>
   <strong>Title:</strong>
@@ -29,37 +32,50 @@
   <strong>Liker:</strong>
   <%= @question.likes.count %>
 </p>
-<h2><p>Answers</p></h2>
-<table align="center" width=1000px >
+
+<h4><p style="text-align:left;">Answers</p></h4>
+<div class="list-group">
   <% @answers.each do |answer| %>
-  <thead>
-    <tr>
-      <th align="left">level:<%=answer.level %><br>Time<%= answer.created_at %></th>
-      <th align="left">Answeruser</th>
-      <th align="right">like:<%=answer.likes.count%></th>
-      <th align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></th>
-    </tr>
-  </thead>
-  
-  <tbody>
-       <tr>
-         <td></td>
-         <td><%= answer.answeruser %></td>
-         <td><%= answer.content %></td>
-         <td align="right"><%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
-       </tr>
-  </tbody>
+  <div class="list-group-item">
+    <h4 class="list-group-item-heading answeruser"><%= answer.answeruser %></h4>
+    <div class="answer_content">
+      <div><%= answer.content %></div>
+      <!--div align="left">level:<%=answer.level %><br>Time</div-->
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <span class="answer_time"><%= answer.created_at %></span>
+      </div>
+      <div class="col-md-4">
+        <div class="answer_actions" align="right">
+          <span class="badge"><%=answer.likes.count%></span>
+          <a class="answer_actions" href="/answers/like?aid=<%= answer.id%>"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+          
+        </div>
+        <!--%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%-->
+        <!--div style="float:right" align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></div-->
+        <a style="float:right" class="answer_actions" href="/answers/reply?alevel=<%= answer.level%>"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
+        <a class="answer_actions" href="/answers/reply#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+        <a class="answer_actions" href="/answers/reply#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </div>
   <% end %>
-</table>
+</div>
+
 <br>
-<hr>
-<h1><label>您有什么看法？</label><h1>
-<%=form_tag  :action => "addanswer",:method => :post do%>
-<p>
-<%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %>
-</p>
-<%=submit_tag "submit" %>
-<% end %>
-<p>
-<%= link_to 'Back', questions_path %>
-</p>
+    <hr>
+    <h1><label>您有什么看法？</label><h1>
+    <%=form_tag  :action => "addanswer",:method => :post do%>
+    <p>
+    <%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %>
+    </p>
+    <%=submit_tag "submit" %>
+    <% end %>
+  <p><%= link_to 'Back', questions_path %></p>
+</div>
+
+<div class="col-md-3">
+  related questions
+</div>
+</div>

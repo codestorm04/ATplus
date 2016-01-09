@@ -1,3 +1,31 @@
 // Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.answer_content{
+    margin: 20px 25px 15px 30px;
+}
+
+.answer_time{
+    color:#999;
+}
+
+.answeruser{
+    color:#436EEE;
+    font-size:21px;
+    font-weight:900;
+}
+
+.answer_actions{
+    float:right;
+    padding:0 5px 0 5px;
+    color:#666;
+}
+
+.answer_actions :hover{
+    color:#436EEE;
+    
+}
+
+a {
+    color: inherit;
+}

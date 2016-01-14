@@ -90,6 +90,9 @@ class QuestionsController < ApplicationController
   end
   def addanswer
    @content=params[:content]
+   #added by lyz
+   @towhom=params[:towhom]
+   
    if(session[:qid]||session[:user_id]) then
    @qid=session[:qid]
    @uid=session[:user_id]
@@ -100,7 +103,9 @@ class QuestionsController < ApplicationController
    else
    @num=1
    end
-   @new_answer=Answer.create(:question => @question,:level => @num,:content => @content,:answeruser => @user)
+   
+   #added a column by lyz
+   @new_answer=Answer.create(:question => @question,:level => @num,:content => @content,:answeruser => @user,:toreply_id=> @towhom)
    @answers=Answer.where(:question => @question)
    else
    puts "session overtime"
@@ -114,6 +119,8 @@ class QuestionsController < ApplicationController
    @question=Question.find(@id)
    session[:qid]=@id
    @answers=Answer.where(:question_id => @id)
+   #added by lyz
+   @article = Article.find(@question.article_id)
   end
   def like
     @qid = session[:qid]

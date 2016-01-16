@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       #redirect_to user
    
 	    puts "ddedendengdengldenglu登陆cchchechenchengchenggchenggochenggonchenggong成功"
-	    redirect_to user
+	    redirect_to questions_path
     else
       # 创建一个错误消息
       flash[:danger] = 'Invalid email/password combination' # 不完全正确

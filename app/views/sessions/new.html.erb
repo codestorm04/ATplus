@@ -17,6 +17,15 @@
         <% end %>
         <span>New user? <%= link_to "Sign up now!", new_user_path %></span>
       </div>
+     <div>
+	<div align="center">
+  <p>
+  <%=form_tag :controller => "users",:action => "search",:method => :post do%>
+  <%=text_field_tag :search_name,:z,:placeholder => "Please input what you need here",:autofocus=>"true",:value =>"",:style =>"width:800px;height:30px"%>
+  <%=submit_tag "search"%>
+  </p>
+  <%end%>
+     </div>
     </div>
   </div>
   <div class="col-md-1"></div>

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 	post 'answers/reply'
 	get 'answers/reply'
 	post 'questions/addanswer'
+	post 'users/search'
   get  'signup' => 'users#new'
 
   

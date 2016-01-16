@@ -27,13 +27,13 @@
       <%= f.label :password_confirmation, "Confirmation" %><br>
       <%= f.password_field :password_confirmation %>
   </div>
-  <div class="field">
+  <div class="field" style="display:none">
     <%= f.label :admin %><br>
-    <%= f.number_field :admin %>
+    <%= f.number_field :admin,:value => 0 %>
   </div>
   <div class="field">
     <%= f.label :sex %><br>
-    <%= f.number_field :sex %>
+    <%= select :user,:sex,[['male',1],['male',0]], {:include_blank=>true,:selected=> :sex}%>
   </div>
   <div class="field">
     <%= f.label :institute %><br>

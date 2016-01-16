@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Admin</th>
+      <th>Sex</th>
+      <th>Institute</th>
+      <th>Phonenumber</th>
+      <th>Field</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td><%= user.admin %></td>
+        <td><%= user.sex %></td>
+        <td><%= user.institute %></td>
+        <td><%= user.phonenumber %></td>
+        <td><%= user.field %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

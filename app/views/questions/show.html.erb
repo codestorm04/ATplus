@@ -5,7 +5,7 @@
 <blockquote>
   <p><h3><strong><%= @question.title %></strong></h3></p><br/>
   <h5><%= @question.content %></h5>
-  <footer><em><a href="<%= @article.path %>"><%= @article.title %></a></em></footer>
+  <footer><em><a href="/articles/download?id=<%= @question.article_id %>"><%= @article.title %></a></em></footer>
 </blockquote>
 
 <div class="row">
@@ -30,7 +30,7 @@
 </div>
 
 
-
+<!--<%=button_to"download",:controller =>:articles,:action =>:download,:id =>@question.article_id%>-->
   
 <br/><br/><br/>
 <p style="text-align:left;font-size:24px;font-weight:bold;">Answers</p>

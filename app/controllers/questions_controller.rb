@@ -27,28 +27,43 @@ class QuestionsController < ApplicationController
       @questions=Question.where(:questionuser => 'yuan')
   end
   def addquestion
-    @flag=0
+    #@flag=0
     @uid=session[:user_id]
     @uname=User.where(:id => @uid).first.name
-    @id=params[:sid]
-    if(@id==1)
-      @field="computer"
-    elsif (@id==2)
-      @field="software"
-    elsif (@id==3)
-      @field="internet"
-    end
+    @field=params[:field]
+    #if(@id==1)
+     # @field = 'computer'
+    #elsif (@id==2)
+     # @field = 'software'
+    #elsif (@id==3)
+      #@field = 'internet'
+    #end
     @title=params[:text]
     @article=params[:atext]
     @content=params[:content]
-    @flag=Article.where(:title => @article).count
-    if(@flag==0)
-      redirect_to :action =>"index"
+    @file =params[:file]
+    @filename =@file['filedata'].original_filename
+    @author=params[:author]
+    @flag = Article.where(:title => @filename).count
+    if(@flag>0)
+      @aid=Article.where(:title => @filename).first.id
+      @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
+    #@flag=Article.where(:title => @article).count
+    #if(@flag==0)
+    #  redirect_to :action =>"index"
     else
-    @aid=Article.where(:title => @article).first.id
-    @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
-    @questions=Question.all
+     File.open("../ATplus/public/articles/'"+@filename+"'","wb") do |f|
+     f.write(@file['filedata'].read)
+     @aid=Article.all.last.id
+     @aid=@aid+1
+     @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
+     @new_article =Article.create(:title => @filename,:field =>@field,:path =>"../ATplus/public/articles/'"+@filename+"'",:author =>@author)
+     end
     end
+   # @aid=Article.where(:title => @article).first.id
+    #@new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
+    @questions=Question.all
+    #end
   end      
   def search
     @flag=0

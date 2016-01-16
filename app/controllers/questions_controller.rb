@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :content, :questionuser, :articleid, :field, :filepath, :liker, :obligate1, :obligate2, :obligate3)
   end
   def index
-    @questions = Question.all
+    @questions = Question.all.order("id desc")
   end
   def manage
       @uid=session[:user_id]
@@ -64,6 +64,7 @@ class QuestionsController < ApplicationController
     #@new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
     @questions=Question.all
     #end
+    redirect_to :action => "index"
   end      
   def search
     @flag=0
@@ -124,8 +125,8 @@ class QuestionsController < ApplicationController
    @answers=Answer.where(:question => @question)
    else
    puts "session overtime"
-   redirect_to user
    end
+   redirect_to '/questions/show?qid='+@qid
   end
   # GET /questions/1
   # GET /questions/1.json
@@ -149,6 +150,7 @@ class QuestionsController < ApplicationController
     Like.delete(@lid)
     end  
     @answers=Answer.where(:question_id => @qid).order("level")
+    redirect_to '/questions/show?qid='+@qid
   end
   # GET /questions/new
   def new

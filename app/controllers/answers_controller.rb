@@ -19,6 +19,7 @@ class AnswersController < ApplicationController
     Like.delete(@lid)
     end  
     @answers=Answer.where(:question_id => @qid).order("level")
+    redirect_to '/questions/show?qid='+@qid
   end
   def reply
    @alevel=params[:alevel]

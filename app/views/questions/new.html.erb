@@ -35,7 +35,7 @@ content<br>
     <br/>
     The author of the article<%=text_field_tag :author,:empty,:value => "",:class => "form-control"%>
     <br/>
-    Field of your question<%=select_tag :sid,options_for_select([['computer',1],['software',2],['internet',3]],1),:class => "form-control"%>
+    Field of your question<%=select_tag :field,options_for_select([['computer','computer'],['software','software'],['internet','internet']],'computer'),:class => "form-control"%>
     <br/>
     <p align="left">
     content<br/>

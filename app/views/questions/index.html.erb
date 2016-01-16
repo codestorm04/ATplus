@@ -46,5 +46,12 @@
 </table>
 
 <br>
+<p>
+<%=form_tag({:controller=> "articles",:action =>"upload"},:multipart =>"true")%>
+<p><label for="upload_file">选择上传文件</label>
+    <%= file_field("file", "filedata")%>
+    <%= submit_tag '提交' %></p>
+</p>
+
 
 <%= link_to 'Click here to ask a new question!!', {:controller => "questions",:action => "new" }%>

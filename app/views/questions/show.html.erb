@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <strong>Articleid:</strong>
-  <%= @question.article_id %>
+  <strong>Article:</strong>
+  <%= @question.article.title %>
 </p>
 
 <p>
@@ -29,6 +29,7 @@
   <strong>Likes:</strong>
   <%= @question.likes.count %>
 </p>
+<%=button_to"download",:controller =>:articles,:action =>:download,:id =>@question.article_id%>
 <h2><p>Answers</p></h2>
 <table align="center" width=1000px >
   <% @answers.each do |answer| %>

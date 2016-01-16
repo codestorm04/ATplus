@@ -1,11 +1,15 @@
 <h1>New Question</h1>
 
-<%=form_tag :controller =>"questions",:action => "addquestion",:method =>:post do %>
+<%=form_tag({:controller =>"questions",:action => "addquestion"},:multipart => "ture") do%>
 <p align="center">
 Title of your question<%=text_field_tag :text,:empty,:autofocus =>"true",:value => "",:style =>"width:400px;height:30px"%>    
-Field of your question<%=select_tag :sid,options_for_select([['computer',1],['software',2],['internet',3]],1)%>
+Field of your question<%=select_tag :field,options_for_select([['computer','computer'],['software','software'],['internet','internet']],'computer')%>
 <br><br>
 The name of the article<%=text_field_tag :atext,:empty,:value => "",:style =>"width:500px;height:30px"%>
+<br><br>
+The article of your question<%=file_field("file","filedata")%>
+<br>
+The author of the article<%=text_field_tag :author,:empty,:value => "",:style =>"width:400px;height:30px"%>
 </p>
 <p align="center">
 content<br>
@@ -13,4 +17,5 @@ content<br>
 </p>
 <%=submit_tag "submit"%>
 <% end %>
-<%= link_to 'Back', questions_path %>
+
+<%= link_to 'Back', :controller =>"questions",:action =>"index"%>

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 	post'questions/addquestion'
 	get 'answers/reply'
 	post 'answers/like'
+	post 'articles/upload'
+	post 'articles/download'
 	post'answers/reply'
 	post 'questions/addanswer'
   get  'signup' => 'users#new'

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 	get 'articles/download'
 	post'answers/reply'
 	post 'questions/addanswer'
+	post 'users/search'
   get  'signup' => 'users#new'
 
   

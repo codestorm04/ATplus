@@ -4,32 +4,42 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-  end
-  def information
-    @uid=session[:user_id]
-    @user= User.find(@uid)
+    if logged_in? && @current_user.admin==1
+      @users = User.all
+    else
+      redirect_to login_path
+    end
   end
   # GET /users/1
   # GET /users/1.json
   def show
-    @questions = Question.all
+  # @user = current_user
   end
 
   # GET /users/new
   def new
-    @user = User.new
+    if logged_in? 
+      log_out
+    end
+      @user = User.new
   end
 
   # GET /users/1/edit
   def edit
+    @current_user = current_user
+    if logged_in? 
+    else
+      redirect_to login_path
+    end
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    if @user.admin != 0 
+      @user.admin = 0
+    end
     respond_to do |format|
       if @user.save
 	log_in @user
@@ -45,13 +55,18 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if params[:user][:admin] != 0
+      log_out
+      redirect_to login_path
+    else
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -65,6 +80,12 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+ 
+  #search function is to search the user whose name is the params "search_name"
+  #this function is Fuzzy query
+  def search
+    @users = User.where("name LIKE ?", ['%', params[:search_name], '%'].join)
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.

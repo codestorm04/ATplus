@@ -2,9 +2,9 @@
 
 <h1>Listing Users</h1>
 
-<table>
+<table  class="table table-hover">
   <thead>
-    <tr>
+    <tr style="color:#337ab7;">
       <th>Email</th>
       <th>Name</th>
       <th>Admin</th>
@@ -20,7 +20,7 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.email %></td>
-        <td><%= user.name %></td>
+        <td><a href="/users/<%= user.id%>"><%= user.name %></a></td>
         <td><%= user.admin %></td>
         <td><%= user.sex %></td>
         <td><%= user.institute %></td>
@@ -30,6 +30,8 @@
     <% end %>
   </tbody>
 </table>
+
+
 
 <br>
 

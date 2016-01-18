@@ -29,6 +29,9 @@ class QuestionsController < ApplicationController
   def addquestion
     #@flag=0
     @uid=session[:user_id]
+    if(!@uid)
+      redirect_to '/' and return
+    end
     @uname=User.where(:id => @uid).first.name
     @field=params[:field]
     #if(@id==1)
@@ -101,6 +104,19 @@ class QuestionsController < ApplicationController
      if(@need==[])
        @flag=1
      end
+    #added by lyz for searching title of the questions 
+    elsif(@type=="title")
+      words = @text.split(' ')
+      sql = "select * from questions where questions.title like '%" + words[0] +"%' "
+      for i in 1..words.length-1
+        sql = sql + "and questions.title like '%"+ words[i] +"%' "
+      end
+      sql = sql + 'limit 50'
+      @need=Question.find_by_sql(sql)
+      #@need=@need.first.id
+      if(@need==[])
+        @flag=1
+      end
     end 
     end
   end
@@ -109,9 +125,11 @@ class QuestionsController < ApplicationController
    #added by lyz
    @towhom=params[:towhom]
    
-   if(session[:qid]||session[:user_id]) then
+   #changed from || to &&
+   if(session[:qid]&&session[:user_id]) then
    @qid=session[:qid]
    @uid=session[:user_id]
+   puts '----------------------', session[:qid],session[:user_id]
    @question=Question.find(@qid)
    @user=User.find(@uid).name
    if(Answer.where(:question => @question).first!=nil)
@@ -123,10 +141,12 @@ class QuestionsController < ApplicationController
    #added a column by lyz
    @new_answer=Answer.create(:question => @question,:level => @num,:content => @content,:answeruser => @user,:toreply_id=> @towhom)
    @answers=Answer.where(:question => @question)
+   redirect_to '/questions/show?qid='+@qid
+   
    else
    puts "session overtime"
+   redirect_to ""
    end
-   redirect_to '/questions/show?qid='+@qid
   end
   # GET /questions/1
   # GET /questions/1.json
@@ -154,6 +174,12 @@ class QuestionsController < ApplicationController
   end
   # GET /questions/new
   def new
+    @uid=session[:user_id]
+    if(!@uid)
+      flash[:danger] = 'please login first!' # 不完全正确
+      #redirect_to '/' and return
+      render :template => "sessions/new"
+    end
     @question = Question.new
   end
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+	
 	get 'questions/show'
 	get 'questions/manage'
 	get 'questions/ban'
@@ -11,23 +12,26 @@ Rails.application.routes.draw do
 	get 'questions/like'
 	post'questions/ban'
 	get 'questions/ban'
-	get 'users/information'
 	post'questions/search'
 	get 'questions/search'
 	post'questions/addquestion'
+	post 'questions/addanswer'
+	
 	get 'answers/reply'
 	post 'answers/like'
 	get 'answers/like'
 	post 'answers/reply'
 	get 'answers/reply'
+	post'answers/reply'
+	
 	post 'articles/upload'
 	post 'articles/download'
 	get 'articles/download'
-	post'answers/reply'
-	post 'questions/addanswer'
-	post 'users/search'
+	
   get  'signup' => 'users#new'
-
+  get 'users/information'
+	post 'users/search'
+	get 'users/search'
   
   resources :articles
   resources :likes

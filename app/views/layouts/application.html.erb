@@ -33,22 +33,22 @@
               <!--<%=form_tag :controller => "questions",:action => "search",:method => "get" ,:class => "navbar-form navbar-left" do%>-->
               <form class="navbar-form navbar-left" role="search" action="/questions/search" method="get">
                 <div class="form-group input-group-sm">
-                  <input name="text" type="text" class="form-control " placeholder="looking for questions..." size="50">
+                  <input name="text" id="content" type="text" class="form-control " placeholder="looking for questions or users..." size="50">
                 </div>
                 &nbsp;
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-primary" onclick="$('#type_para').attr('value','author');$(this).closest('form').submit();">Search</button>
+                  <button type="button" class="btn btn-sm btn-primary" onclick="$('#type_para').attr('value','title');$(this).closest('form').submit();">Search</button>
                   <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <input type="text" name="type" id="type_para" value="" style="display:none;"/>
                   <ul class="dropdown-menu">
-                    <li><a href="#" onclick="$('#type_para').attr('value','author');$(this).closest('form').submit();">author</a></li>
-                    <li><a href="#" onclick="$('#type_para').attr('value','field');$(this).closest('form').submit();">field</a></li>
-                    <li><a href="#" onclick="$('#type_para').attr('value','keyword');$(this).closest('form').submit();">keyword</a></li>
-                    <!--li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li-->
+                    <li><a href="#" onclick="$('#type_para').attr('value','author');$(this).closest('form').submit();">by author</a></li>
+                    <li><a href="#" onclick="$('#type_para').attr('value','field');$(this).closest('form').submit();">by field</a></li>
+                    <li><a href="#" onclick="$('#type_para').attr('value','keyword');$(this).closest('form').submit();">by keyword</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a onclick="window.location.replace('/users/search?search_name='+$('#content').val());">search users</a></li>
                   </ul>
                 </div>
               </form>
@@ -61,7 +61,7 @@
           <ul class="nav navbar-nav navbar-right">
             <% if logged_in? %>
               <% user = current_user %>
-              <li><%= link_to user.name, '/users/information', method: "get" %></li>
+              <li><a href="<%= '/users/%d'% user.id%>"><span class="glyphicon glyphicon-user" style="cursor:pointer" title="<%= user.name%>" aria-hidden="true"></span></a></li>
           		<li><%= link_to "Log out", logout_path, method: "delete" %></li>
           	  <% else %>
                 <li><%= link_to "Log in", login_path %></li>
@@ -79,6 +79,7 @@
     $(function(){
       $(".dropdown-toggle").dropdown('toggle');
       }); 
+    $(e.target).blur();
 </script>
 
     <div class="container">

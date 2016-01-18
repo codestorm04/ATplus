@@ -1,7 +1,8 @@
 # ATplus
 Issues:
-    login/signup validations
-    answer/ask success redirection
-    bugs in searching
-    deleting of answers/questions
-    searching by content/title
+    code css in questions content
+    links of users.id
+    footer/page division
+    css of reply/like
+    upload file checking
+    user profile display

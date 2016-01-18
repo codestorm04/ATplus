@@ -4,59 +4,7 @@
 <%else%>
 <h1 style="text-align:left;">NO Results</h1>
 <%end%>
-<!--<div align="center">-->
-<!--  <p>-->
-<!--  <%=form_tag :controller => "questions",:action => "search",:method => :post do%>-->
-<!--  <%=text_field_tag :text,:z,:placeholder => "Please input what you need here",:autofocus=>"true",:value =>"",:style =>"width:800px;height:30px"%>-->
-<!--  <p>-->
-<!--  author<%=radio_button_tag "type","author",:checked%>-->
-<!--  field<%=radio_button_tag "type","field"%>-->
-<!--  keyword<%=radio_button_tag "type","keyword"%>-->
-<!--  <%=submit_tag "search"%>-->
-<!--  </p>-->
-  
-<!--  <%end%>-->
-<!--  </p>-->
-<!--</div>-->
-
-
-<!--<table>-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--      <th>Title</th>-->
-<!--      <th>Content</th>-->
-<!--      <th>Questionuser</th>-->
-<!--      <th>Article</th>-->
-<!--      <th>Field</th>-->
-<!--      <th>Filepath</th>-->
-<!--      <th>Likes</th>-->
-<!--      <th>Obligate1</th>-->
-<!--      <th>Obligate2</th>-->
-<!--      <th>Obligate3</th>-->
-<!--      <th colspan="3"></th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-
-<!--  <tbody>-->
-<!--    <% @need.each do |question| %>-->
-<!--      <tr>-->
-<!--        <td><%= question.title %></td>-->
-<!--        <td><%= question.content %></td>-->
-<!--        <td><%= question.questionuser %></td>-->
-<!--        <td><%= question.article.title %></td>-->
-<!--        <td><%= question.field %></td>-->
-<!--        <td><%= question.filepath %></td>-->
-<!--        <td><%= question.likes.count %></td>-->
-<!--        <td><%= question.obligate1 %></td>-->
-<!--        <td><%= question.obligate2 %></td>-->
-<!--        <td><%= question.obligate3 %></td>-->
-<!--        <td><%= link_to 'Show',{:action => "show",:qid => question.id} %></td>-->
-<!--        <td><%= link_to 'Edit', edit_question_path(question) %></td>-->
-<!--        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-<!--      </tr>-->
-<!--    <% end %>-->
-<!--  </tbody>-->
-<!--</table>-->
+<h4>for query:<small><%= @text%>&nbsp;(<%= @need.length%> records)</small></h4>
 
 <br>
 <table class="table table-hover">

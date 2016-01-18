@@ -4,7 +4,7 @@
     <br/><br/><br/>
     <div class="panel panel-default">
       <div class="panel-body">
-        <%= form_for(@user) do |f| %>
+        <%= form_for( @user, :html => {:class => 'x',:id => 'myForm'}) do |f| %>
           <% if @user.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -16,45 +16,140 @@
               </ul>
             </div>
           <% end %>
-        
-          <div class="field">
-            <%= f.label :email %><br>
-            <%= f.text_field :email ,:class => "form-control"%>
-          </div>
-          <div class="field">
-            <%= f.label :name %><br>
-            <%= f.text_field :name ,:class => "form-control"%>
-          </div>
-          <div class="field_pwd">
-        	<%= f.label :password %><br>
-              <%= f.password_field :password ,:class => "form-control"%>
-          </div>
-          <div class="field_pwd">
-              <%= f.label :password_confirmation, "Confirm password" %><br>
-              <%= f.password_field :password_confirmation ,:class => "form-control" %>
-          </div>
-          <div class="field">
-            <%= f.label :admin %><br>
-            <%= f.number_field :admin ,:class => "form-control"%>
-          </div>
-          <div class="field">
-            <%= f.label :gender %><br>
-            <%= f.number_field :sex ,:class => "form-control"%>
-          </div>
-          <div class="field">
-            <%= f.label :institute %><br>
-            <%= f.text_field :institute ,:class => "form-control"%>
-          </div>
-          <div class="field">
-            <%= f.label :phonenumber %><br>
-            <%= f.text_field :phonenumber,:class => "form-control" %>
-          </div>
-          <div class="field">
-            <%= f.label :field %><br>
-            <%= f.text_field :field ,:class => "form-control"%>
-          </div>
+
+          <br/><br/>        
+          
+          
+          
+          
+  <!--<div class="form-group has-feedback">-->
+  <!--  <label for="inputTwitter" class="control-label">Twitter</label>-->
+  <!--  <div class="input-group">-->
+  <!--    <span class="input-group-addon">@</span>-->
+  <!--    <input type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15" class="form-control" id="inputTwitter" placeholder="1000hz" required>-->
+  <!--  </div>-->
+  <!--  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>-->
+  <!--  <span class="help-block with-errors">Hey look, this one has feedback icons!</span>-->
+  <!--</div>        -->
+  
+  <!--<div class="form-group">-->
+  <!--  <div class="checkbox">-->
+  <!--    <label>-->
+  <!--      <input type="checkbox" id="terms" data-error="Before you wreck yourself" required>-->
+  <!--      Check yourself-->
+  <!--    </label>-->
+  <!--    <div class="help-block with-errors"></div>-->
+  <!--  </div>-->
+  <!--</div>          -->
+          
+          
+          
+  <div class="form-group">
+    <label for="inputName" class="control-label">Name</label>
+    <input type="text" name="user[name]" class="form-control" id="inputName" placeholder="Cina Saffary" required>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail" class="control-label">Email</label>
+    <input type="email" name="user[email]" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+    <div class="help-block with-errors"></div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="control-label">Password</label>
+    <input name="user[password]" type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+    <span class="help-block">Minimum of 6 characters</span>
+  </div>
+  <div class="form-group">
+    <input name="user[password_confirmation]" type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+    <div class="help-block with-errors"></div>
+  </div>
+  <!--<div class="field">-->
+  <!--  <%= f.label :admin %><br>-->
+  <!--  <%= f.number_field :admin ,:class => "form-control"%>-->
+  <!--</div>-->
+  <!--<div class="field">-->
+  <!--  <%= f.label :gender %><br>-->
+  <!--  <%= f.number_field :sex ,:class => "form-control"%>-->
+  <!--</div>-->
+  <div class="form-group">
+    <div class="radio">
+      <label>
+        <input type="radio" name="user[sex]" value="1" required>
+        male
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="user[sex]" value="0" required>
+        female
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputName" class="control-label">institute</label>
+    <input type="text" name="user[institute]" class="form-control" id="inputName" placeholder="" required>
+  </div>
+  <div class="form-group">
+    <label for="inputName" class="control-label">field</label>
+    <input type="text" name="user[field]" class="form-control" id="inputName" placeholder="" required>
+  </div>          
+  <div class="form-group">
+    <label for="inputName" class="control-label">phonenumber</label>
+    <input type="number" name="user[phonenumber]" class="form-control" id="inputName" placeholder="" required>
+  </div>
+  
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+         <!-- <div class="field">-->
+         <!--   <%= f.label :email %><br>-->
+         <!--   <%= f.text_field :email ,:class => "form-control"%>-->
+         <!-- </div>-->
+         <!-- <div class="field">-->
+         <!--   <%= f.label :name %><br>-->
+         <!--   <%= f.text_field :name ,:class => "form-control"%>-->
+         <!-- </div>-->
+         <!-- <div class="field_pwd">-->
+        	<!--<%= f.label :password %><br>-->
+         <!--     <%= f.password_field :password ,:class => "form-control"%>-->
+         <!-- </div>-->
+         <!-- <div class="field_pwd">-->
+         <!--     <%= f.label :password_confirmation, "Confirm password" %><br>-->
+         <!--     <%= f.password_field :password_confirmation ,:class => "form-control" %>-->
+         <!-- </div>-->
+         <!-- <div class="field">-->
+         <!--   <%= f.label :admin %><br>-->
+         <!--   <%= f.number_field :admin ,:class => "form-control"%>-->
+         <!-- </div>-->
+         <!-- <div class="field">-->
+         <!--   <%= f.label :gender %><br>-->
+         <!--   <%= f.number_field :sex ,:class => "form-control"%>-->
+         <!-- </div>-->
+         <!-- <div class="field">-->
+         <!--   <%= f.label :institute %><br>-->
+         <!--   <%= f.text_field :institute ,:class => "form-control"%>-->
+         <!-- </div>-->
+         <!-- <div class="field">-->
+         <!--   <%= f.label :phonenumber %><br>-->
+         <!--   <%= f.text_field :phonenumber,:class => "form-control" %>-->
+         <!-- </div>-->
+         <!-- <div class="field">-->
+         <!--   <%= f.label :field %><br>-->
+         <!--   <%= f.text_field :field ,:class => "form-control"%>-->
+         <!-- </div>-->
           <div class="actions">
-            <%= f.submit  "Sign up", class: "btn btn-primary"%>
+            <%= f.submit  "Submit", class: "btn btn-primary"%>
           </div>
         <% end %>
       </div>
@@ -62,3 +157,7 @@
   </div>
   <div class="col-md-3"></div>
 </div>
+
+<script>
+  $('#myForm').validator();
+</script>

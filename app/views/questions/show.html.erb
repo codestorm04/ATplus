@@ -10,7 +10,7 @@
 
 <div class="row">
   <span class="text-left">&nbsp;&nbsp;&nbsp;by <strong><em class="answeruser"><%= @question.questionuser %></em></strong></span>
-  <span class="text-left"><span class="label label-success"><%= @question.field %></span></span>
+  <span class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question Field: <span class="label label-success"><%= @question.field %></span></span>
   <%if(@question.state==1)%>
     <span><small>the question is closed</small></span>
   <%else%>
@@ -38,8 +38,8 @@
   <% @answers.each do |answer| %>
   <div class="list-group-item">
     <h4 class="list-group-item-heading answeruser"><%= answer.answeruser %>
-    <%if(answer.toreply_id!=nil)%>
-      <small>reply to</small><span class="list-group-item-heading answeruser"><%= answer.toreply_id %></span>
+    <%if(answer.toreply_id!=nil && answer.toreply_id!="")%>
+      <small>reply to </small><span class="list-group-item-heading answeruser"><%= answer.toreply_id %></span>
     <%else%>
       <p/>
     <%end%>
@@ -81,7 +81,7 @@
     <p>
       <!--%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %-->
       <textarea id="answer_content" name="content" class="form-control" rows="7"></textarea>
-      <input type="text" id="towhom" style="display:none;" name="towhom" value="0"></input>
+      <input type="text" id="towhom" style="display:none;" name="towhom" value=""></input>
     </p>
     <%=submit_tag "answer" , class: "btn btn-primary"%>
   <% end %>

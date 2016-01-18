@@ -6,7 +6,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <h1>log in</h1>
-        <%= form_for(:session, url: login_path) do |f| %>
+        <%= form_for(:session, url: login_path, ) do |f| %>
           <%= f.label :email %>
           <%= f.email_field :email, :class => "form-control"%>
           <br/>
@@ -17,16 +17,10 @@
         <% end %>
         <span>New user? <%= link_to "Sign up now!", new_user_path %></span>
       </div>
-     <div>
-	<div align="center">
-  <p>
-  <%=form_tag :controller => "users",:action => "search",:method => :post do%>
-  <%=text_field_tag :search_name,:z,:placeholder => "Please input what you need here",:autofocus=>"true",:value =>"",:style =>"width:800px;height:30px"%>
-  <%=submit_tag "search"%>
-  </p>
-  <%end%>
-     </div>
     </div>
+    <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-danger" %>
+  <% end %>
   </div>
   <div class="col-md-1"></div>
 </div>

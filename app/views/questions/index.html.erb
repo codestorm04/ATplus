@@ -21,22 +21,22 @@
 <table class="table table-hover">
   <thead>
     <tr style="color:#337ab7;">
-      <th style="width:20px;">Title</th>
-      <th>Asker</th>
-      <th>Paper</th>
-      <th>Field</th>
-      <th>Likes</th>
-      <th>Create</th>
-      <th>Update</th>
+      <th class="col-md-3" style="width:20px;">Title</th>
+      <th class="col-md-1">Asker</th>
+      <th class="col-md-2">Paper</th>
+      <th class="col-md-1">Field</th>
+      <th class="col-md-1">Likes</th>
+      <th class="col-md-2">Create</th>
+      <th class="col-md-2">Update</th>
     </tr>
   </thead>
 
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td class="col-md-3"><a class="btn btn-link" href="/questions/show?qid=<%= question.id %>"><%= question.title %></a></td>
-        <td class="col-md-1"><a class="btn btn-link" href="/users"><%= question.questionuser %></a></td>
-        <td class="col-md-2"><%= question.article.title %></td>
+        <td class="col-md-3" style="width:20px;weight:50px;text-overflow:ellipsis;"><a class="btn btn-link" href="/questions/show?qid=<%= question.id %>"><%= question.title %></a></td>
+        <td class="col-md-1"><a class="btn btn-link" href="/users/<%= %>"><%= question.questionuser %></a></td>
+        <td class="col-md-2" style="text-overflow:ellipsis;"><%= question.article.title %></td>
         <td class="col-md-1"><%= question.field %></td>
         <td class="col-md-1"><div class="badge"><%= question.likes.count %></div></td>
         <td class="col-md-2"><%= question.created_at %></td>

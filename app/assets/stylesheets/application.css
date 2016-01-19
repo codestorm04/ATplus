@@ -15,4 +15,16 @@
  *= require bootstrap
  */
  
+ .gravatar{
+     width:30px;
+     height:30px;
+ }
  
+ a {
+  color:#436EEE;
+ }
+ 
+ a:hover{
+  color:#666;
+  background-color:#fff;
+ }

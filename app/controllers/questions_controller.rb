@@ -10,9 +10,10 @@ class QuestionsController < ApplicationController
     @questions = Question.all.order("id desc")
   end
   def manage
-      @uid=session[:user_id]
+      @uid=params[:uid]
+      #@uid=session[:user_id]
       @username=User.where(:id => @uid).first.name
-      @questions=Question.where(:questionuser => 'yuan')
+      @questions=Question.where(:questionuser => @username)
   end
   def ban
       @qid = params[:qid]
@@ -145,7 +146,8 @@ class QuestionsController < ApplicationController
    
    else
    puts "session overtime"
-   redirect_to ""
+   flash[:danger] = 'please login first!' # 不完全正确
+   render :template => "sessions/new"
    end
   end
   # GET /questions/1

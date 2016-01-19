@@ -6,3 +6,10 @@ Issues:
     css of reply/like
     upload file checking
     user profile display
+    listing users
+    
+bugs:
+    like css in question show view
+    table sizing
+    user links in question show view
+    

@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
     has_many :answers
     has_many :likes
     belongs_to :article
+    belongs_to :user
     #def file=(filedata_field)
     #    transaction do
     #    if filedata_field.size>0 then

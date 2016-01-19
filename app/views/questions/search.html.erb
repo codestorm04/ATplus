@@ -8,6 +8,15 @@
 
 <br>
 <table class="table table-hover">
+  <colgroup>
+      <col class="col-md-3">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-1">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-2">
+    </colgroup>
   <thead>
     <tr style="color:#337ab7;">
       <th>Title</th>
@@ -24,7 +33,7 @@
     <% @need.each do |question| %>
       <tr>
         <td><a class="btn btn-link" href="/questions/show?qid=<%= question.id %>"><%= question.title %></a></td>
-        <td><a class="btn btn-link" href="/users"><%= question.questionuser %></a></td>
+        <td><a class="btn btn-link" href="/users"><%= question.user.name %></a></td>
         <td><%= question.article.title %></td>
         <td><%= question.field %></td>
         <td><div class="badge"><%= question.likes.count %></div></td>

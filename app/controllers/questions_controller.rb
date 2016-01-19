@@ -12,8 +12,8 @@ class QuestionsController < ApplicationController
   def manage
       @uid=params[:uid]
       #@uid=session[:user_id]
-      @username=User.where(:id => @uid).first.name
-      @questions=Question.where(:questionuser => @username)
+      #@username=User.where(:id => @uid).first.name
+      @questions=Question.where(:user_id => @uid)
   end
   def ban
       @qid = params[:qid]
@@ -24,8 +24,8 @@ class QuestionsController < ApplicationController
          Question.update(@qid,:state => '0')
       end
       @uid=session[:user_id]
-      @username=User.where(:id => @uid).first.name
-      @questions=Question.where(:questionuser => 'yuan')
+      #@username=User.where(:id => @uid).first.name
+      @questions=Question.where(:user_id => @uid)
   end
   def addquestion
     #@flag=0
@@ -33,7 +33,6 @@ class QuestionsController < ApplicationController
     if(!@uid)
       redirect_to '/' and return
     end
-    @uname=User.where(:id => @uid).first.name
     @field=params[:field]
     #if(@id==1)
      # @field = 'computer'
@@ -51,17 +50,17 @@ class QuestionsController < ApplicationController
     @flag = Article.where(:title => @filename).count
     if(@flag>0)
       @aid=Article.where(:title => @filename).first.id
-      @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
+      @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:user_id => @uid,:field =>@field)
     #@flag=Article.where(:title => @article).count
     #if(@flag==0)
     #  redirect_to :action =>"index"
     else
      File.open("../ATplus/public/articles/'"+@filename+"'","wb") do |f|
      f.write(@file['filedata'].read)
-     @aid=Article.all.last.id
-     @aid=@aid+1
-     @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:questionuser => @uname,:field =>@field)
      @new_article =Article.create(:title => @filename,:field =>@field,:path =>"../ATplus/public/articles/'"+@filename+"'",:author =>@author)
+     @aid=Article.all.last.id
+     @aid=@aid
+     @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:user_id => @uid,:field =>@field)
      end
     end
    # @aid=Article.where(:title => @article).first.id
@@ -125,7 +124,7 @@ class QuestionsController < ApplicationController
    @content=params[:content]
    #added by lyz
    @towhom=params[:towhom]
-   
+   #@replyto_user=User.where(:id => @towhom)
    #changed from || to &&
    if(session[:qid]&&session[:user_id]) then
    @qid=session[:qid]
@@ -140,7 +139,7 @@ class QuestionsController < ApplicationController
    end
    
    #added a column by lyz
-   @new_answer=Answer.create(:question => @question,:level => @num,:content => @content,:answeruser => @user,:toreply_id=> @towhom)
+   @new_answer=Answer.create(:user_id => @uid,:question => @question,:level => @num,:content => @content,:user_id => @uid,:toreply_id=> @towhom)
    @answers=Answer.where(:question => @question)
    redirect_to '/questions/show?qid='+@qid
    

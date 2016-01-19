@@ -9,7 +9,7 @@
 </blockquote>
 
 <div class="row">
-  <span class="text-left">&nbsp;&nbsp;&nbsp;by <strong><em class="answeruser"><%= @question.questionuser %></em></strong></span>
+  <span class="text-left">&nbsp;&nbsp;&nbsp;by <strong><a class="answeruser" href="/users/<%= @question.user.id%>"><%= @question.user.name %></a></strong></span>
   <span class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question Field: <span class="label label-success"><%= @question.field %></span></span>
   <%if(@question.state==1)%>
     <span><small>the question is closed</small></span>
@@ -37,15 +37,27 @@
 <div class="list-group">
   <% @answers.each do |answer| %>
   <div class="list-group-item">
-    <h4 class="list-group-item-heading answeruser"><%= answer.answeruser %>
-    <%if(answer.toreply_id!=nil && answer.toreply_id!="")%>
-      <small>reply to </small><span class="list-group-item-heading answeruser"><%= answer.toreply_id %></span>
-    <%else%>
-      <p/>
-    <%end%>
-    </h4>
+    <div class="row">
+      <div class="col-md-1">
+        <%= gravatar_for answer.user %>
+      </div>
+      <div class="col-md-10">
+        <h5 class="list-group-item-heading answeruser"><a class="answeruser" href="/users/<%= answer.user.id%>"><%= answer.user.name %></a>
+          <%if(answer.toreply_id!=nil && answer.toreply_id!="")%>
+            <%@reply_to=User.find(answer.user_id) %>
+            <small>reply to </small><span class="list-group-item-heading answeruser"><a class="answeruser" href="/users/<%= answer.user.id%>"><%= @reply_to.name %></a></span>
+          <%else%>
+            <p/>
+          <%end%>
+        </h5>
+      </div>
+    </div>
+    
+    
     <div class="answer_content">
+      <br/><br/>
       <div><%= answer.content %></div>
+      <br/>
       <!--div align="left">level:<%=answer.level %><br>Time</div-->
     </div>
     <div class="row">
@@ -55,12 +67,19 @@
       <div class="col-md-4">
         <div class="answer_actions" align="right">
           <span class="badge"><%=answer.likes.count%></span>
-          <a class="answer_actions" href="/answers/like?aid=<%= answer.id%>"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
-          
+           <%if(Like.where(:user_id=>session[:user_id]).where(:answer_id => answer.id).count==0)%>
+              <a class="answer_actions" href="/answers/like?aid=<%= answer.id%>">
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+              </a>
+            <%else%>
+              <a class="answer_actions" href="/answers/like?aid=<%= answer.id%>">
+                <span style="color:#FF4040;" class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+              </a>
+            <%end%>
         </div>
         <!--%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%-->
         <!--div style="float:right" align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></div-->
-        <div style="display:none;"><%= answer.answeruser %></div>
+        <div style="display:none;"><%= answer.user.name %></div>
         <!--a style="float:right" class="answer_actions" href="/answers/reply?alevel=<%= answer.level%>"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a-->
         <a style="float:right" class="answer_actions" onclick="$('#towhom').attr('value',$(this).prev().html());$('#answer_content').attr('placeholder','replying to '+$(this).prev().html());"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
         <a class="answer_actions" href="/answers/reply#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>

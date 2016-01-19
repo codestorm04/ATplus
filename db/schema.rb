@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113133639) do
+ActiveRecord::Schema.define(version: 20160119084045) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "level"
     t.string   "title"
     t.string   "content"
-    t.string   "answeruser"
     t.string   "filepath"
     t.string   "liker"
     t.string   "obligate1"
@@ -26,7 +25,8 @@ ActiveRecord::Schema.define(version: 20160113133639) do
     t.string   "obligate3"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "toreply_id"
+    t.integer  "toreply_id"
+    t.integer  "user_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20160113133639) do
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
-    t.string   "questionuser"
     t.integer  "article_id"
     t.string   "field"
     t.string   "filepath"
@@ -72,9 +71,10 @@ ActiveRecord::Schema.define(version: 20160113133639) do
     t.string   "obligate1"
     t.string   "obligate2"
     t.string   "obligate3"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "state"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|

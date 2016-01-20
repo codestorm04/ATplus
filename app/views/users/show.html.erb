@@ -20,11 +20,19 @@
   </a>
   <a href="#" class="list-group-item">
     <strong>Admin:</strong>
-    <%= @user.admin %>
+    <% if(@user.admin==0)%>
+      ordinary menber
+    <%else%>
+      admin
+    <%end%>
   </a>
   <a href="#" class="list-group-item">
     <strong>Gender:</strong>
-    <%= @user.sex %>
+    <% if(@user.sex==0)%>
+      female
+    <%else%>
+      male
+    <%end%>
   </a>
   <a href="#" class="list-group-item">
     <strong>Institute:</strong>

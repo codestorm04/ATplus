@@ -26,6 +26,7 @@ class QuestionsController < ApplicationController
       @uid=session[:user_id]
       #@username=User.where(:id => @uid).first.name
       @questions=Question.where(:user_id => @uid)
+      redirect_to '/questions/manage?uid=%d'% @uid
   end
   def addquestion
     #@flag=0

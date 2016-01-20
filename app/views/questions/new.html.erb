@@ -1,5 +1,49 @@
-<h1>New Question</h1>
+<div class="row">
+  <div class="col-md-1"></div>
+  
+  <div class="col-md-5"> 
+  <p align="left">
+    <h1>New Question</h1>
+    <%=form_tag({:controller =>"questions",:action => "addquestion"},:multipart => "ture") do%>
+    <div class="form-group">
+      <label for="inputName" class="control-label">Title of your question</label>
+      <input type="text" name="text" class="form-control" id="inputName" placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label for="inputName" class="control-label">The name of the article</label>
+      <input type="text" name="atext" class="form-control" id="inputName" placeholder="" required>
+    </div>
+    </p>
+    The article of your question<%=file_field("file","filedata")%>
+    Field of your question<%=select_tag :field,options_for_select([['computer','computer'],['software','software'],['internet','internet']],'computer'),:class => "form-control"%>
+    <br/>
+    <div class="form-group">
+      <label for="inputName" class="control-label">The author of the article</label>
+      <input type="text" name="author" class="form-control" id="inputName" placeholder="" required>
+    </div>
+    
+    <!--Title of your question<%=text_field_tag :text,:empty,:autofocus =>"true",:value => "",:class => "form-control"%>    -->
+    <!--<br/>-->
+    <!--The name of the article<%=text_field_tag :atext,:empty,:value => "",:class => "form-control"%>-->
+    <!--</p>-->
+    <!--The article of your question<%=file_field("file","filedata")%>-->
+    <!--<br/>-->
+    <!--The author of the article<%=text_field_tag :author,:empty,:value => "",:class => "form-control"%>-->
+    <!--<br/>-->
+    <!--Field of your question<%=select_tag :field,options_for_select([['computer','computer'],['software','software'],['internet','internet']],'computer'),:class => "form-control"%>-->
+    <!--<br/>-->
+    <p align="left">
+      <div class="form-group">
+        <label for="inputName" class="control-label">content</label>
+        <!--<input type="text" name="field" class="form-control" id="inputName" placeholder="Cina Saffary" required>-->
+        <textarea id="answer_content" name="content" class="form-control" rows="7" required></textarea>
+      </div>
+    </p>
+    <%=submit_tag "ask", class: "btn btn-primary"%>
+    <% end %>
+   </div>
+  <div class="col-md-4"></div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', questions_path %>
+<script>
+  $('form').validator();
+</script>

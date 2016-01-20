@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @question.content %>
+</p>
+
+<p>
+  <strong>Questionuser:</strong>
+  <%= @question.questionuser %>
+</p>
+
+<p>
+  <strong>Articleid:</strong>
+  <%= @question.article_id %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @question.field %>
+</p>
+
+<p>
+  <strong>Likes:</strong>
+  <%= @question.likes.count %>
+</p>
+<h2><p>Answers</p></h2>
+<table align="center" width=1000px >
+  <% @answers.each do |answer| %>
+  <thead>
+    <tr>
+      <th align="left">level:<%=answer.level %><br>Time<%= answer.created_at %></th>
+      <th align="left">Answeruser</th>
+      <th align="right">like:<%=answer.likes.count%></th>
+      <th align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+       <tr>
+         <td></td>
+         <td><%= answer.answeruser %></td>
+         <td><%= answer.content %></td>
+         <%if(Like.where(:user_id=>session[:user_id]).where(:answer_id => answer.id).count==0)%>
+         <td align="right"><%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
+         <%else%>
+         <td align="right"><%=button_to "cancel like!!",{:controller =>"answers",:action => "like",:aid =>answer.id}%></td>
+         <%end%>
+       </tr>
+  </tbody>
+  <% end %>
+</table>
+<br>
+<hr>
+<%if(@question.state==1)%>
+<h1>The Question is banned by the owner!<h1>
+<%else%>  
+<h1><label>您有什么看法？</label><h1>
+    <%if(Like.where(:user_id=>session[:user_id]).where(:question_id => session[:qid]).count==0)%>
+      <p align="right"><%=button_to "like this question!",{:controller =>"questions",:action => "like"}%></p>
+    <%else%>
+      <p align="right"><%=button_to "cancel like this question!!",{:controller =>"questions",:action => "like"}%></p>
+    <%end%>
+<%=form_tag  :action => "addanswer",:method => :post do%>
+<p>
+<%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %>
+</p>
+<%=submit_tag "submit" %>
+<% end %>
+<% end %>
+<p>
+<%= link_to 'Back', questions_path %>
+</p>

@@ -1,15 +1,29 @@
+<div class="row">
+  <div class="col-md-7"></div>
+  
+  <div class="col-md-4">
+    <br/><br/><br/><br/><br/>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h1>log in</h1>
+        <%= form_for(:session, url: login_path, ) do |f| %>
+          <%= f.label :email %>
+          <%= f.email_field :email, :class => "form-control"%>
+          <br/>
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => "form-control" %>
+          <br/>
+          <%= f.submit "Log in", class: "btn btn-primary" %>
+        <% end %>
+        <span>New user? <%= link_to "Sign up now!", new_user_path %></span>
+      </div>
+    </div>
+    <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: "alert alert-danger" %>
+  <% end %>
+  </div>
+  <div class="col-md-1"></div>
+</div>
 
-<h1>log in</h1>
 
-    <%= form_for(:session, url: login_path) do |f| %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", new_user_path %></p>

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+<%if @flag==0 %>
+<h1 style="text-align:left;">Searching Results</h1> 
+<%else%>
+<h1 style="text-align:left;">NO Results</h1>
+<%end%>
+<h4>for query:<small><%= @text%>&nbsp;(<%= @need.length%> records)</small></h4>
+
+<br>
+<table class="table table-hover">
+  <colgroup>
+      <col class="col-md-3">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-1">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-2">
+    </colgroup>
+  <thead>
+    <tr style="color:#337ab7;">
+      <th>Title</th>
+      <th>Asker</th>
+      <th>Paper</th>
+      <th>Field</th>
+      <th>Likes</th>
+      <th>Create</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @need.each do |question| %>
+      <tr>
+        <td><a class="btn btn-link" href="/questions/show?qid=<%= question.id %>"><%= question.title %></a></td>
+        <td><a class="btn btn-link" href="/users"><%= question.user.name %></a></td>
+        <td><%= question.article.title %></td>
+        <td><%= question.field %></td>
+        <td><div class="badge"><%= question.likes.count %></div></td>
+        <td><%= question.created_at %></td>
+        <td><%= question.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

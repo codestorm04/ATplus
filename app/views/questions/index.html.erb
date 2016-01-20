@@ -1,45 +1,74 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
+<div class="col-md-11">
+<h1 style="text-align:left;">Questions List</h1>
+<!--table class="table table-hover">
+<p><%=link_to 'personal information',:controller => :users,:action => :information%></p>
 <h1>Listing Questions</h1>
-
-<table>
+<div align="center">
+  <p>
+  <%=form_tag :controller => "questions",:action => "search",:method => :post do%>
+  <%=text_field_tag :text,:z,:placeholder => "Please input what you need here",:autofocus=>"true",:value =>"",:style =>"width:800px;height:30px"%>
+  <p>
+  author<%=radio_button_tag "type","author",:checked%>
+  field<%=radio_button_tag "type","field"%>
+  keyword<%=radio_button_tag "type","keyword"%>
+  <%=submit_tag "search"%>
+  </p>
+  <%end%>
+  </p>
+</div-->
+<table class="table table-hover table-condensed table-striped">
+    <colgroup>
+      <col class="col-md-3">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-1">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-2">
+    </colgroup>
   <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Questionuser</th>
-      <th>Articleid</th>
-      <th>Field</th>
-      <th>Filepath</th>
-      <th>Liker</th>
-      <th>Obligate1</th>
-      <th>Obligate2</th>
-      <th>Obligate3</th>
-      <th colspan="3"></th>
+    <tr style="color:#337ab7;">
+      <th class="col-md-3" style="width:20px;">Title</th>
+      <th class="col-md-1">Asker</th>
+      <th class="col-md-2">Paper</th>
+      <th class="col-md-1">Field</th>
+      <th class="col-md-1">Likes</th>
+      <th class="col-md-2">Create</th>
+      <th class="col-md-2">Update</th>
     </tr>
   </thead>
 
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.title %></td>
-        <td><%= question.content %></td>
-        <td><%= question.questionuser %></td>
-        <td><%= question.articleid %></td>
+        <td><a onclick="window.location.href='/questions/show?qid=<%= question.id %>'" style="cursor:pointer;"><%= question.title %></a></td>
+        <td><a href="/users/<%= question.user_id%>"><%= question.user.name %></a></td>
+        <td title="<%= question.article.title %>"><%= question.article.title %></td>
         <td><%= question.field %></td>
-        <td><%= question.filepath %></td>
-        <td><%= question.liker %></td>
-        <td><%= question.obligate1 %></td>
-        <td><%= question.obligate2 %></td>
-        <td><%= question.obligate3 %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><div class="badge"><%= question.likes.count %></div></td>
+        <td><%= question.created_at %></td>
+        <td><%= question.updated_at %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+<div class="col-md-2">
+
+</div>
 
 <br>
+<p> 
+<!--<%=form_tag({:controller=> "articles",:action =>"upload"},:multipart =>"true")%>-->
+<!--<p><label for="upload_file">选择上传文件</label>-->
+<!--    <%= file_field("file", "filedata")%>-->
+<!--    <%= submit_tag '提交' %></p>-->
+<!--</p>-->
 
-<%= link_to 'New Question', new_question_path %>
+
+<!--<%= link_to 'Click here to ask a new question!!', {:controller => "questions",:action => "new" }%>-->
+
+
+  

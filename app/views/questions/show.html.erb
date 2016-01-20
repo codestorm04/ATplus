@@ -1,54 +1,108 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-8">
+<blockquote>
+  <p><h3><strong><%= @question.title %></strong></h3></p><br/>
+  <h5><%= @question.content %></h5>
+  <footer><em><a href="/articles/download?id=<%= @question.article_id %>"><%= @article.title %></a></em></footer>
+</blockquote>
 
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
+<div class="row">
+  <span class="text-left">&nbsp;&nbsp;&nbsp;by <strong><a class="answeruser" href="/users/<%= @question.user.id%>"><%= @question.user.name %></a></strong></span>
+  <span class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question Field: <span class="label label-success"><%= @question.field %></span></span>
+  <%if(@question.state==1)%>
+    <span><small>the question is closed</small></span>
+  <%else%>
+  <%end%>
+  <span class="text-right">
+    <%if(Like.where(:user_id=>session[:user_id]).where(:question_id => session[:qid]).count==0)%>
+      <a class="answer_actions" href="/questions/like">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+      </a>
+    <%else%>
+      <a class="answer_actions" href="/questions/like">
+        <span style="color:#FF4040;" class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+      </a>
+    <%end%>
+    <span style="float:right;" class="badge"><%= @question.likes.count %></span>
+  </span>
+</div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @question.content %>
-</p>
 
-<p>
-  <strong>Questionuser:</strong>
-  <%= @question.questionuser %>
-</p>
+<!--<%=button_to"download",:controller =>:articles,:action =>:download,:id =>@question.article_id%>-->
+  
+<br/><br/><br/>
+<p style="text-align:left;font-size:24px;font-weight:bold;">Answers</p>
+<div class="list-group">
+  <% @answers.each do |answer| %>
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col-md-1">
+        <%= gravatar_for answer.user %>
+      </div>
+      <div class="col-md-10">
+        <h5 class="list-group-item-heading answeruser"><a class="answeruser" href="/users/<%= answer.user.id%>"><%= answer.user.name %></a>
+          <%if(answer.toreply_id!=nil && answer.toreply_id!="")%>
+            <%@reply_to=User.find(answer.user_id) %>
+            <small>reply to </small><span class="list-group-item-heading answeruser"><a class="answeruser" href="/users/<%= answer.user.id%>"><%= @reply_to.name %></a></span>
+          <%else%>
+            <p/>
+          <%end%>
+        </h5>
+      </div>
+    </div>
+    
+    
+    <div class="answer_content">
+      <br/><br/>
+      <div><%= answer.content %></div>
+      <br/>
+      <!--div align="left">level:<%=answer.level %><br>Time</div-->
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <span class="answer_time"><%= answer.created_at %></span>
+      </div>
+      <div class="col-md-4">
+        <div class="answer_actions" align="right">
+          <span class="badge"><%=answer.likes.count%></span>
+           <%if(Like.where(:user_id=>session[:user_id]).where(:answer_id => answer.id).count==0)%>
+              <a class="answer_actions" href="/answers/like?aid=<%= answer.id%>">
+                <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+              </a>
+            <%else%>
+              <a class="answer_actions" href="/answers/like?aid=<%= answer.id%>">
+                <span style="color:#FF4040;" class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+              </a>
+            <%end%>
+        </div>
+        <!--%=button_to "like it!",{:controller =>"answers",:action => "like",:aid =>answer.id}%-->
+        <!--div style="float:right" align="center"><%=button_to "reply",{:controller =>"answers",:action =>"reply",:alevel =>answer.level}%></div-->
+        <div style="display:none;"><%= answer.user.name %></div>
+        <!--a style="float:right" class="answer_actions" href="/answers/reply?alevel=<%= answer.level%>"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a-->
+        <a style="float:right" class="answer_actions" onclick="$('#towhom').attr('value',$(this).prev().html());$('#answer_content').attr('placeholder','replying to '+$(this).prev().html());"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
+        <a class="answer_actions" href="/answers/reply#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+        <a class="answer_actions" href="/answers/reply#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
 
-<p>
-  <strong>Articleid:</strong>
-  <%= @question.articleid %>
-</p>
-
-<p>
-  <strong>Field:</strong>
-  <%= @question.field %>
-</p>
-
-<p>
-  <strong>Filepath:</strong>
-  <%= @question.filepath %>
-</p>
-
-<p>
-  <strong>Liker:</strong>
-  <%= @question.liker %>
-</p>
-
-<p>
-  <strong>Obligate1:</strong>
-  <%= @question.obligate1 %>
-</p>
-
-<p>
-  <strong>Obligate2:</strong>
-  <%= @question.obligate2 %>
-</p>
-
-<p>
-  <strong>Obligate3:</strong>
-  <%= @question.obligate3 %>
-</p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<br>
+<hr>
+<%if(@question.state==1)%>
+  <h1><h1>
+<%else%>  
+  <h3 class="text-left">Answer Here<h3>
+  <%=form_tag  :action => "addanswer",:method => :post do%>
+    <p>
+      <!--%=text_area_tag :content,params[:content],:innerText =>"sads",:style =>"width:400px;height:200px;" %-->
+      <textarea id="answer_content" name="content" class="form-control" rows="7"></textarea>
+      <input type="text" id="towhom" style="display:none;" name="towhom" value=""></input>
+    </p>
+    <%=submit_tag "answer" , class: "btn btn-primary"%>
+  <% end %>
+<% end %>
+  

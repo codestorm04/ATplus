@@ -1,0 +1,52 @@
+<br/><br/>
+<ul class="nav nav-tabs">
+  <li role="presentation"><a href="/users/<%= @uid%>" style="color:#337ab7;">Profile</a></li>
+  <li role="presentation" class="active"><a href="#">My Questions</a></li>
+  <li role="presentation"><a href="#" style="color:#337ab7;">My Papers</a></li>
+</ul>
+
+<p id="notice"><%= notice %></p>
+<!--p><%=link_to 'personal information',:controller => :users,:action => :information%></p-->
+<h1>My Questions</h1>
+<table class="table table-hover" >
+  <thead>
+    <tr  style="color:#337ab7;">
+      <th>Title</th>
+      <th>Content</th>
+      <th>Asker</th>
+      <th>Paper</th>
+      <th>Field</th>
+      <th>Likes</th>
+      <th>CreateTime</th>
+      <th>UpdateTime</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><a class="btn btn-link" href="/questions/show?qid=<%= question.id %>"><%= question.title %></a></td>
+        <td><%= question.content %></td>
+        <td><%= question.questionuser %></td>
+        <td><%= question.article.title %></td>
+        <td><%= question.field %></td>
+        <!--td><%= question.filepath %></td-->
+        <td><%= question.likes.count %></td>
+        <td><%= question.created_at %></td>
+        <td><%= question.updated_at %></td>
+        <!--td><%= link_to 'Show',{:action => "show",:qid => question.id} %></td-->
+        <td><%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><a class="answer_actions" href="/answers/delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></td>
+        <%if(question.state==nil ||question.state==0)%>
+        <td><%= button_to 'ban',:controller =>:questions,:action=>:ban,:qid=> question.id,data:{confirm: 'Are you sure?'}%></td>
+        <%else%>
+        <td><%= button_to 'open',:controller =>:questions,:action=>:ban,:qid=> question.id,data:{confirm: 'Are you sure?'}%></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!--%= link_to 'Back to the main page',:controller =>:questions,:action =>:index%-->

@@ -1,13 +1,38 @@
 Rails.application.routes.draw do
+  root 'sessions#new'
   get 'sessions/new'
-
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 	
+	get 'questions/show'
+	get 'questions/manage'
+	get 'questions/ban'
+	post 'questions/like'
+	get 'questions/like'
+	post'questions/ban'
+	get 'questions/ban'
+	post'questions/search'
+	get 'questions/search'
+	post'questions/addquestion'
+	post 'questions/addanswer'
+	
+	get 'answers/reply'
+	post 'answers/like'
+	get 'answers/like'
+	post 'answers/reply'
+	get 'answers/reply'
+	post'answers/reply'
+	
+	post 'articles/upload'
+	post 'articles/download'
+	get 'articles/download'
+	
   get  'signup' => 'users#new'
-
-
+  get 'users/information'
+	post 'users/search'
+	get 'users/search'
+  
   resources :articles
   resources :likes
   resources :fields

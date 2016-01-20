@@ -6,7 +6,26 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.all
   end
-
+  def upload
+  @file = params[:file]
+  @filename = @file['filedata'].original_filename
+  FileUtils.mkdir("../ATplus/public/upload") unless File.exist?("../ATplus/public/upload")
+  File.open("../ATplus/public/upload/'"+@filename+"'", "wb") do |f|
+  f.write(@file['filedata'].read)      
+  end
+  session[:filename]=@filename
+  end
+  def download
+  #@system_uploadfile.add_download_count
+  #send_file file_path,:disposition => 'inline'
+  @aid =params[:id]
+  @path=Article.where(:id =>@aid).first.path
+  @filename=Article.where(:id =>@aid).first.title
+  io = File.open(@path)
+  io.binmode
+  send_data(io.read,:filename => @filename,:disposition => 'attachment')
+  io.close  
+  end
   # GET /articles/1
   # GET /articles/1.json
   def show

@@ -9,28 +9,92 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
       </script>
     <![endif]-->
+    <title>AT+ | Free Academia Knowledge Community</title>
   </head>
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <%= link_to "sample app", '#', id: "logo" %>
-        <nav>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Academia Talk+</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li id="users-active"><a href="/users">Users</a></li>
+            <li id="questions-active"><a href="/questions">Questions</a></li>
+            <li id="fields-active"><a href="/fields">Fields</a></li>
+            
+            <li>
+              <!--<%=form_tag :controller => "questions",:action => "search",:method => "get" ,:class => "navbar-form navbar-left" do%>-->
+              <form class="navbar-form navbar-left" role="search" action="/questions/search" method="get">
+                <div class="form-group input-group-sm">
+                  <input name="text" id="content" type="text" class="form-control " placeholder="looking for questions or users..." size="50">
+                </div>
+                &nbsp;
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-primary" onclick="$('#type_para').attr('value','title');$(this).closest('form').submit();">Search</button>
+                  <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <input type="text" name="type" id="type_para" value="" style="display:none;"/>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="$('#type_para').attr('value','author');$(this).closest('form').submit();">by author</a></li>
+                    <li><a href="#" onclick="$('#type_para').attr('value','field');$(this).closest('form').submit();">by field</a></li>
+                    <li><a href="#" onclick="$('#type_para').attr('value','keyword');$(this).closest('form').submit();">by keyword</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a onclick="window.location.replace('/users/search?search_name='+$('#content').val());">search users</a></li>
+                  </ul>
+                </div>
+              </form>
+              <!--<%end%>-->
+            </li>
+            <li class="navbar-form">
+              <a href="/questions/new" style="padding:0px"><button class="btn btn-sm btn-warning">&nbsp;&nbsp;Ask&nbsp;&nbsp;</button></a>
+            </li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
-          
-	<% if logged_in? %>
-		<li>logined</li>
-		<li><%= link_to "Log out", logout_path, method: "delete" %></li>
-	<% else %>
-          	<li><%= link_to "Log in", login_path %></li>
-	
-        <% end %>
-
-	  </ul>
-        </nav>
+            <% if logged_in? %>
+              <% user = current_user %>
+              <li><a title="<%= user.name%>" href="<%= '/users/%d'% user.id%>"><span class="glyphicon glyphicon-user" style="cursor:pointer" aria-hidden="true"></span></a></li>
+          		<li><%= link_to "Log out", logout_path, method: "delete" %></li>
+          	  <% else %>
+                <li><%= link_to "Log in", login_path %></li>
+          	  <% end %>
+	        </ul>
+        </div>
       </div>
-    </header>
+    </nav>
+      
+    
+<script>
+   $(function(){
+      $(".dropdown-toggle").dropdown('toggle');
+      }); 
+    $(function(){
+      $(".dropdown-toggle").dropdown('toggle');
+      }); 
+      //var url = window.location.href.split('/');
+      var url = new Array();
+      url = window.location.pathname.split('/');
+      console.log(url[1]);
+      if(url[1] == 'users')
+        $('#users-active').addClass('active');
+      if(url[1] == 'questions')
+        $('#questions-active').addClass('active');
+      if(url[1] == 'fields')
+        $('#fields-active').addClass('active');
+</script>
+
     <div class="container">
       <%= yield %>
     </div>
+    <div style="height:80px;margin-top:70px;background: #fff;bottom:0px;width:100%;text-align:center;margin:auto;"></div>
+    <div class="panel-footer" style="height:50px;margin-top:70px;background: #fff;position:fixed;bottom:0px;width:100%;text-align:center;margin:auto;">COPYRIGHT © 2016 Academia Talk+ | Free Academia Knowledge Community</div>
   </body>
 </html>

@@ -6,7 +6,31 @@ class AnswersController < ApplicationController
   def index
     @answers = Answer.all
   end
-
+  def like
+    @aid = params[:aid]
+    @uid = session[:user_id]
+    @qid = session[:qid]
+    @question=Question.find(@qid)
+    @exist=Like.where(:user_id => @uid).where(:answer_id=>@aid).count
+    if(@exist==0) then
+    @new_like=Like.create(:answer_id =>@aid,:user_id =>@uid)
+    else
+    @lid=Like.where(:user_id => @uid).where(:answer_id => @aid).first.id
+    Like.delete(@lid)
+    end  
+    @answers=Answer.where(:question_id => @qid).order("level")
+    redirect_to '/questions/show?qid='+@qid
+  end
+  def reply
+   @alevel=params[:alevel]
+   @qid=session[:qid]
+   if(@qid!=nil) then
+     @question=Question.find(@qid)
+     @answers=Answer.where(:question_id => @qid).order("level")
+   else
+     puts "nil"
+   end
+  end
   # GET /answers/1
   # GET /answers/1.json
   def show

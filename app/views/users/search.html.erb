@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Users</h1>
+
+<table  class="table table-hover">
+  <colgroup>
+      <col class="col-md-3">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-1">
+      <col class="col-md-1">
+      <col class="col-md-2">
+      <col class="col-md-2">
+    </colgroup>
+  <thead>
+    <tr style="color:#337ab7;">
+      <th>Email</th>
+      <th>Name</th>
+      <th>Admin</th>
+      <th>Sex</th>
+      <th>Institute</th>
+      <th>Phonenumber</th>
+      <th>Field</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><a href="/users/<%= user.id%>"><%= user.name %></a></td>
+        <td><%= user.admin %></td>
+        <td><%= user.sex %></td>
+        <td><%= user.institute %></td>
+        <td><%= user.phonenumber %></td>
+        <td><%= user.field %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+

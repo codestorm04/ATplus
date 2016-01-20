@@ -50,5 +50,10 @@ end
 group :production do
   gem 'pg' # for Heroku deployment
   gem 'rails_12factor'
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
 

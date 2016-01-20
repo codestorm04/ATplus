@@ -56,9 +56,9 @@ class QuestionsController < ApplicationController
     #if(@flag==0)
     #  redirect_to :action =>"index"
     else
-     File.open("../ATplus/public/articles/'"+@filename+"'","wb") do |f|
+     File.open(Rails.public_path+"articles/"+@filename+"","wb") do |f|
      f.write(@file['filedata'].read)
-     @new_article =Article.create(:title => @filename,:field =>@field,:path =>"../ATplus/public/articles/'"+@filename+"'",:author =>@author)
+     @new_article =Article.create(:title => @filename,:field =>@field,:path =>Rails.public_path+"articles/"+@filename+"",:author =>@author)
      @aid=Article.all.last.id
      @aid=@aid
      @new_question=Question.create(:article_id => @aid,:title => @title,:content => @content,:user_id => @uid,:field =>@field)

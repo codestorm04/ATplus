@@ -57,8 +57,17 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if params[:user][:admin] != 0
-      log_out
-      redirect_to login_path
+      # log_out
+      # redirect_to login_path
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
     else
       respond_to do |format|
         if @user.update(user_params)

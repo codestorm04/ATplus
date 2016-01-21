@@ -12,7 +12,7 @@
   <span class="text-left">&nbsp;&nbsp;&nbsp;by <strong><a class="answeruser" href="/users/<%= @question.user.id%>"><%= @question.user.name %></a></strong></span>
   <span class="text-left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Question Field: <span class="label label-success"><%= @question.field %></span></span>
   <%if(@question.state==1)%>
-    <span><small>the question is closed</small></span>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>question state: <span class="label label-danger"><small>closed</small></span></span>
   <%else%>
   <%end%>
   <span class="text-right">

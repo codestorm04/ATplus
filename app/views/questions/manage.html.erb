@@ -11,7 +11,7 @@
 <table class="table table-hover" >
   <thead>
     <tr  style="color:#337ab7;">
-      <th>Title</th>
+      <th>Question Title</th>
       <th>Content</th>
       <th>Asker</th>
       <th>Paper</th>
@@ -19,7 +19,7 @@
       <th>Likes</th>
       <th>CreateTime</th>
       <th>UpdateTime</th>
-      <th></th>
+      <th>Operation</th>
     </tr>
   </thead>
 
@@ -37,7 +37,7 @@
         <td><%= question.updated_at %></td>
         <!--td><%= link_to 'Show',{:action => "show",:qid => question.id} %></td-->
         <!--<td><%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
-        <td><a class="answer_actions" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></td>
+        <!--<td><a class="answer_actions" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></td>-->
         <%if(question.state==nil ||question.state==0)%>
         <td><%= button_to 'ban',:controller =>:questions,:action=>:ban,:qid=> question.id,data:{confirm: 'Are you sure?'}%></td>
         <%else%>

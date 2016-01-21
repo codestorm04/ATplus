@@ -94,7 +94,7 @@ class QuestionsController < ApplicationController
        @flag=1
      end
     elsif(@type=="field")
-     @need=Question.find_by_sql("select * from questions,articles where questions.article_id=articles.id and articles.field='"+@text+"'")
+     @need=Question.where(:field => @text)
      #@need=@need.first.id
      if(@need==[])
        @flag=1
